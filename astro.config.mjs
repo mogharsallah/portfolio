@@ -9,6 +9,13 @@ export default defineConfig({
   site: 'https://gharsallah.com',
   integrations: [sitemap()],
 
+  build: {
+    // Inline the global stylesheet into <head> so it's not a render-blocking
+    // request. Astro's default 'auto' (~4 KB threshold) skips our ~7 KB build;
+    // 'always' forces inlining and trims the LCP critical path.
+    inlineStylesheets: 'always',
+  },
+
   experimental: {
     svgo: true,
   },
