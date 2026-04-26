@@ -97,8 +97,10 @@ const personJsonLd = {
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    {/* Preload only the regular face of each family — keeps the LCP critical
-        path short without spending bytes on italic faces that may not render. */}
+    {
+      /* Preload only the regular face of each family — keeps the LCP critical
+        path short without spending bytes on italic faces that may not render. */
+    }
     <Font cssVariable="--font-fraunces" preload={[{ weight: '400', style: 'normal' }]} />
     <Font cssVariable="--font-inter" preload={[{ weight: '400', style: 'normal' }]} />
     <Font cssVariable="--font-jetbrains-mono" preload={[{ weight: '400', style: 'normal' }]} />
