@@ -1,0 +1,9 @@
+dist/
+.astro/
+.lighthouseci/
+.design-source/
+node_modules/
+bun.lock
+package-lock.json
+**/*.min.*
+public/

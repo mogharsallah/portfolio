@@ -1,0 +1,47 @@
+{
+  "name": "portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "bun run resume:build",
+    "build": "astro build",
+    "preview": "astro preview",
+    "resume:build": "bun resume/build.ts",
+    "astro": "astro",
+    "lighthouse:light": "LH_THEME=light lhci autorun --config=./lighthouserc.cjs",
+    "lighthouse:dark": "LH_THEME=dark  lhci autorun --config=./lighthouserc.cjs",
+    "lighthouse": "bun run lighthouse:light && bun run lighthouse:dark",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "check": "astro check",
+    "validate": "bun run lint && bun run check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.1.9",
+    "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.15.1",
+    "eslint": "^10.2.1",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-better-tailwindcss": "^4.4.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "globals": "^17.5.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.0",
+    "yaml": "^2.8.3"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "tailwindCSS": {
+          "experimental": {
+            "configFile": "src/styles/global.css"
+          },
+          "includeLanguages": {
+            "astro": "html"
+          }
+        }
+      }
+    }
+  },
+  "languages": {
+    "Astro": {
+      "language_servers": ["astro-language-server", "tailwindcss-language-server", "..."]
+    }
+  }
+}

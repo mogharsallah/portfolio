@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+
+const monoMeta = 'font-mono text-[11px] tracking-[0.06em] uppercase text-ink-soft';
+---
+
+<section id="writing" data-nav="writing" data-reveal class="px-gutter py-[130px]">
+  <div class="container-page">
+    <header class="border-rule mb-10 flex items-baseline justify-between border-b pb-5">
+      <h2
+        class="font-display font-display-xl m-0 text-[clamp(40px,5vw,76px)] font-[340] tracking-tight"
+      >
+        <em class="italic">Writing</em>, occasionally
+      </h2>
+      <span class={monoMeta}>{entries.length} {entries.length === 1 ? 'entry' : 'entries'}</span>
+    </header>
+
+    {
+      entries.length === 0 ? (
+        <p class="text-ink-soft m-0 py-6 font-mono text-xs tracking-[0.04em] uppercase">
+          Nothing published yet. Drafts in flight.
+        </p>
+      ) : (
+        entries.map((entry) => (
+          <div class="group border-rule grid grid-cols-1 items-baseline gap-1.5 border-b py-5 opacity-85 transition-opacity duration-200 hover:opacity-100 md:grid-cols-[120px_1fr_160px] md:gap-6 md:py-6">
+            <span class={monoMeta}>{fmt.format(entry.data.date)}</span>
+            <h3 class="font-display font-display-sm m-0 text-[26px] leading-[1.22] font-[380] tracking-[-0.015em]">
+              {entry.data.title}
+            </h3>
+            <span class:list={[monoMeta, 'text-left md:text-right']}>
+              {entry.data.kicker}
+              <span class="inline-block transition-transform duration-300 group-hover:translate-x-2">
+                →
+              </span>
+            </span>
+          </div>
+        ))
+      )
+    }
+  </div>
+</section>

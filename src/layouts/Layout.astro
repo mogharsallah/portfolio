@@ -1,0 +1,109 @@
+---
+import { Font } from 'astro:assets';
+import { loadPortfolio } from '../lib/resume.ts';
+
+const PORTFOLIO = await loadPortfolio();
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = `${PORTFOLIO.name} — ${PORTFOLIO.role}`,
+  description = `${PORTFOLIO.role} based in ${PORTFOLIO.location}. Founding engineer at Flottando. Previously Jimdo, FREE NOW, Bauer Xcel.`,
+  ogImage,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: PORTFOLIO.name,
+  jobTitle: PORTFOLIO.role,
+  email: `mailto:${PORTFOLIO.email}`,
+  url: `https://${PORTFOLIO.site}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Hamburg',
+    addressCountry: 'DE',
+  },
+  sameAs: [`https://${PORTFOLIO.github}`, `https://${PORTFOLIO.site}`],
+  knowsLanguage: PORTFOLIO.about.languages.map((l) => l.name),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script is:inline>
+      // Theme bootstrap — runs before paint to prevent FOUC.
+      // ?theme=light|dark forces the resolved theme transiently (used by Lighthouse runs).
+      (function () {
+        try {
+          const qs = new URLSearchParams(window.location.search).get('theme');
+          const override = qs === 'light' || qs === 'dark' ? qs : null;
+          const stored = localStorage.getItem('theme');
+          const mode = override
+            ? override
+            : stored === 'light' || stored === 'dark' || stored === 'system'
+              ? stored
+              : 'system';
+          const prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const resolved =
+            mode === 'dark' || (mode === 'system' && prefersDark) ? 'graphite' : 'paper';
+          document.documentElement.setAttribute('data-theme', resolved);
+          document.documentElement.setAttribute('data-theme-mode', mode);
+        } catch {
+          document.documentElement.setAttribute('data-theme', 'paper');
+          document.documentElement.setAttribute('data-theme-mode', 'system');
+        }
+      })();
+    </script>
+
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FBFBF9" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E0F11" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={PORTFOLIO.name} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F62FE'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-family='ui-monospace,monospace' font-size='14' font-weight='600' fill='%23FBFBF9'%3EMG%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <Font cssVariable="--font-fraunces" preload />
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-jetbrains-mono" />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(personJsonLd)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

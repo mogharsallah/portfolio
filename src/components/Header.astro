@@ -1,0 +1,119 @@
+---
+import { loadPortfolio } from '../lib/resume.ts';
+
+const PORTFOLIO = await loadPortfolio();
+import ThemeSwitcher from './ThemeSwitcher.astro';
+
+const navItems: [string, string][] = [
+  ['work', 'Work'],
+  ['flottando', 'Currently'],
+  ['about', 'About'],
+  ['writing', 'Writing'],
+  ['contact', 'Contact'],
+];
+---
+
+<header
+  data-pf-header
+  class="text-ink bg-paper-blur over-dark:bg-bold-blur over-dark:text-bold-fg menu-open:bg-bold-blur menu-open:text-bold-fg fixed inset-x-0 top-0 z-20 [backdrop-filter:saturate(140%)_blur(10px)] transition-[color,background-color] duration-350 ease-out [-webkit-backdrop-filter:saturate(140%)_blur(10px)]"
+>
+  <div class="px-gutter flex items-center justify-between gap-4 py-6">
+    <a
+      href="#intro"
+      data-nav-link="intro"
+      class="flex min-w-0 flex-nowrap items-center gap-2.5 font-mono text-xs tracking-[0.04em] text-inherit no-underline"
+    >
+      <span aria-hidden="true" class="bg-accent inline-block size-2 flex-none rounded-[2px]"></span>
+      <span class="whitespace-nowrap">{PORTFOLIO.name}</span>
+      <span class="text-ink-soft hidden whitespace-nowrap min-[1024px]:inline sm:inline md:hidden"
+        >· {PORTFOLIO.location}</span
+      >
+    </a>
+
+    <div class="flex flex-none items-center gap-4 md:gap-7">
+      <nav aria-label="Sections" class="hidden gap-7 font-mono text-xs tracking-[0.04em] md:flex">
+        {
+          navItems.map(([id, label]) => (
+            <a
+              href={`#${id}`}
+              data-nav-link={id}
+              class="aria-current:text-accent-text aria-current:border-b-accent-text border-b border-transparent pb-[3px] text-inherit no-underline opacity-60 transition-[opacity,color,border-color] duration-200 aria-current:opacity-100"
+            >
+              {label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="hidden sm:inline-flex"><ThemeSwitcher /></div>
+
+      <button
+        type="button"
+        data-pf-menu-btn
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="pf-menu-panel"
+        class="border-rule inline-flex size-[38px] cursor-pointer items-center justify-center rounded-full border bg-transparent p-0 text-inherit transition-[border-color,background-color] duration-200 hover:border-current md:hidden"
+      >
+        <span aria-hidden="true" class="pf-menu-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="pf-menu-panel"
+    data-pf-menu-panel
+    hidden
+    class="border-rule px-gutter border-t bg-inherit pt-4 pb-6 md:hidden"
+  >
+    <nav aria-label="Sections" class="flex flex-col font-mono text-sm tracking-[0.04em] uppercase">
+      {
+        navItems.map(([id, label]) => (
+          <a
+            href={`#${id}`}
+            data-nav-link={id}
+            data-pf-menu-link
+            class="border-rule border-b py-3.5 text-inherit no-underline opacity-85 last:border-b-0"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="mt-[18px]"><ThemeSwitcher /></div>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-pf-menu-btn]');
+  const panel = document.querySelector<HTMLElement>('[data-pf-menu-panel]');
+  const header = document.querySelector<HTMLElement>('[data-pf-header]');
+  if (btn && panel && header) {
+    const close = () => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+      panel.hidden = true;
+      header.removeAttribute('data-menu-open');
+    };
+    const open = () => {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
+      panel.hidden = false;
+      header.setAttribute('data-menu-open', '');
+    };
+    btn.addEventListener('click', () => {
+      if (btn.getAttribute('aria-expanded') === 'true') close();
+      else open();
+    });
+    panel.querySelectorAll('[data-pf-menu-link]').forEach((a) => {
+      a.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') close();
+    });
+    const mq = window.matchMedia('(min-width: 900px)');
+    mq.addEventListener('change', (e) => {
+      if (e.matches) close();
+    });
+  }
+</script>

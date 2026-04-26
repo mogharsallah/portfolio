@@ -1,0 +1,89 @@
+---
+import { loadPortfolio } from '../lib/resume.ts';
+
+const PORTFOLIO = await loadPortfolio();
+
+const [emailUser, emailDomain] = PORTFOLIO.email.split('@');
+const meta: [string, string][] = [
+  ['Currently', 'Founding engineer · Flottando'],
+  ['Based', 'Hamburg, DE'],
+  ['Stack', 'Python · TS · AWS · LLMs'],
+  ['Languages', 'AR · FR · EN · DE'],
+];
+
+const ctaBase =
+  'font-mono text-[11.5px] tracking-[0.06em] uppercase no-underline text-ink rounded-full ' +
+  'py-3 px-[18px] transition-[background-color,color,border-color] duration-200 ' +
+  'md:text-xs md:py-3.5 md:px-[22px] ' +
+  'hover:bg-ink hover:text-paper hover:border-ink';
+---
+
+<section
+  id="intro"
+  data-nav="intro"
+  data-reveal
+  class="px-gutter flex min-h-[94vh] items-center py-[160px] pb-20"
+>
+  <div class="container-page">
+    <div
+      data-reveal
+      class="text-ink-soft mb-10 flex flex-wrap items-center gap-[18px] font-mono text-xs tracking-[0.06em] uppercase"
+    >
+      <span>2016 — 2026 · five works</span>
+      <span aria-hidden="true" class="bg-rule h-px w-6 flex-none"></span>
+      <span class="text-accent-text">● open to work</span>
+    </div>
+
+    <h1
+      data-reveal
+      data-d="1"
+      class="font-display font-display-xl m-0 mb-10 max-w-[13ch] text-[clamp(64px,8.4vw,156px)] leading-[0.95] font-[340] tracking-[-0.04em] text-pretty"
+    >
+      Software, built with<br /><em class="text-accent-text font-display-soft font-[320] italic"
+        >care</em
+      >.
+    </h1>
+
+    <div
+      data-reveal
+      data-d="2"
+      class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[1.2fr_1fr] md:gap-[72px]"
+    >
+      <p class="m-0 max-w-[52ch] text-[19px] leading-[1.55]">
+        I'm Mouhamed — a full-stack engineer who's been quietly shipping in Hamburg for over ten
+        years. Currently founding engineer at <span class="text-accent-text font-medium">Flottando</span>,
+        building a fleet management SaaS from a blank repo.
+      </p>
+      <dl class="text-ink-soft m-0 self-end font-mono text-xs leading-[1.9]">
+        {
+          meta.map(([k, v], i) => (
+            <div class:list={['flex justify-between', i === 0 && 'border-rule border-t pt-3']}>
+              <dt class="inline">{k}</dt>
+              <dd class="text-ink m-0 inline">{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div data-reveal data-d="3" class="mt-20 flex flex-wrap items-center gap-3.5">
+      <a
+        class:list={[ctaBase, 'border-ink border']}
+        href={`mailto:${emailUser}@${emailDomain}`}
+        data-email
+        data-email-user={emailUser}
+        data-email-domain={emailDomain}>Get in touch ↗</a
+      >
+      <a
+        class:list={[ctaBase, 'border-rule border']}
+        href="/cv.pdf"
+        download="Mouhamed-Gharsallah-CV.pdf">Download CV ↓</a
+      >
+      <a
+        class="text-ink-soft px-1 py-3.5 font-mono text-[11.5px] tracking-[0.06em] uppercase no-underline md:text-xs"
+        href="#work"
+        data-nav-link="work">↓ See selected work</a
+      >
+    </div>
+  </div>
+</section>

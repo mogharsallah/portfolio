@@ -1,0 +1,245 @@
+/* Tokens, Tailwind v4 mappings, custom variants, component utilities, base. */
+
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────
+   @theme — exposes the design tokens to Tailwind utilities.
+   Color tokens reference the CSS custom properties defined per
+   :root[data-theme] below, so utilities like `bg-paper` /
+   `text-ink-soft` resolve through the theme attribute and react
+   to the in-page theme switcher and the ?theme=… query param.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-paper-blur: var(--paper-blur);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+
+  /* Forced-dark surfaces — used by sections that don't follow data-theme
+     (Spotlight slab, portrait pedestal, header data-over-dark / menu-open). */
+  --color-bold: var(--bold);
+  --color-bold-fg: var(--bold-fg);
+  --color-bold-fg-soft: var(--bold-fg-soft);
+  --color-bold-blur: var(--bold-blur);
+  --color-rule-bold: var(--rule-bold);
+  --color-rule-bold-strong: var(--rule-bold-strong);
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Mirrors the responsive redesign breakpoints; literals match the
+     legacy @media (min-width: …) values that components were tuned against. */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1280px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Custom variants — give Tailwind utilities access to the
+   project's data/aria attribute hooks. The `dark:` variant
+   intentionally overrides Tailwind's default
+   prefers-color-scheme behaviour: theme is always driven by
+   [data-theme], set by the inline bootstrap in Layout.astro.
+   ───────────────────────────────────────────────────────────── */
+@custom-variant dark           (&:where([data-theme="graphite"], [data-theme="graphite"] *));
+@custom-variant over-dark      (&:where([data-over-dark], [data-over-dark] *));
+@custom-variant menu-open      (&:where([data-menu-open], [data-menu-open] *));
+@custom-variant aria-checked   (&:where([aria-checked="true"]));
+@custom-variant aria-expanded  (&:where([aria-expanded="true"], [aria-expanded="true"] *));
+@custom-variant aria-current   (&:where([aria-current="true"]));
+@custom-variant revealed       (&:where([data-revealed]));
+
+/* ─────────────────────────────────────────────────────────────
+   Tokens.
+
+   Theme-independent (always the same colour regardless of
+   data-theme):
+     --accent          IBM blue, decorative fills only
+     --bold / --bold-* forced-dark surfaces
+     --rule-bold-*     hairlines on a dark surface
+     --bold-blur       translucent dark slab (header data-over-dark)
+
+   Theme-dependent (re-bound per :root[data-theme]):
+     --paper / --paper-deep / --ink / --ink-soft / --rule
+     --paper-blur      header default slab — tinted by --paper
+     --accent-text     brighter on graphite to stay AA
+
+   Layout primitives:
+     --container-page  page band cap (max-w-page)
+     --gutter          horizontal page gutter, mobile-aware
+
+   See CLAUDE.md "Two-token accent system" for the --accent vs
+   --accent-text rule.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --accent: #0f62fe;
+
+  --bold: #0e0f11;
+  --bold-fg: #fbfbf9;
+  --bold-fg-soft: rgba(251, 251, 249, 0.55);
+  --rule-bold: rgba(251, 251, 249, 0.16);
+  --rule-bold-strong: rgba(251, 251, 249, 0.22);
+  --bold-blur: color-mix(in srgb, #0e0e0c 60%, transparent);
+
+  --container-page: 1400px;
+  --gutter: clamp(16px, 4vw, 48px);
+}
+
+:root[data-theme='paper'] {
+  --paper: #fbfbf9;
+  --paper-deep: #f2f2ee;
+  --ink: #0e0f11;
+  --ink-soft: #5c6066;
+  --rule: rgba(14, 15, 17, 0.1);
+  --paper-blur: color-mix(in srgb, var(--paper) 78%, transparent);
+  --accent-text: #0f62fe;
+}
+
+:root[data-theme='graphite'] {
+  --paper: #0e0f11;
+  --paper-deep: #16181b;
+  --ink: #f2f1ed;
+  --ink-soft: #9ca0a6;
+  --rule: rgba(242, 241, 237, 0.12);
+  --paper-blur: color-mix(in srgb, var(--paper) 78%, transparent);
+  /* #0F62FE on graphite is 3.83:1 (fails AA). Brighter blue for text/borders only;
+     backgrounds keep --accent so white-on-accent (e.g. theme-switch active state) stays AA. */
+  --accent-text: #4d8fff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Component utilities — only patterns that cannot be expressed
+   cleanly with Tailwind utilities live here.
+
+   Headline pattern in markup:
+     class="font-display font-display-xl text-[clamp(64px,8.4vw,156px)]
+            font-[340] tracking-[-0.04em] leading-[0.95]"
+   ───────────────────────────────────────────────────────────── */
+
+/* Variable-font axes — Fraunces opsz / SOFT. */
+@utility font-display-xl {
+  font-variation-settings: 'opsz' 144;
+}
+@utility font-display-sm {
+  font-variation-settings: 'opsz' 60;
+}
+@utility font-display-soft {
+  font-variation-settings:
+    'opsz' 144,
+    'SOFT' 100;
+}
+
+/* Centered page band — used by every section's `inner` wrapper. */
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+}
+
+/* Section gutter — paired with vertical padding utilities per section. */
+@utility px-gutter {
+  padding-inline: var(--gutter);
+}
+
+/* Hamburger icon — three horizontal bars that morph to an X via the
+   [aria-expanded='true'] state. Pseudo-elements aren't reachable from
+   Tailwind utilities, so this stays declarative. The open/closed state
+   hooks live below the @utility block. */
+@utility pf-menu-icon {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.pf-menu-icon::before,
+.pf-menu-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.pf-menu-icon::before {
+  top: -5px;
+}
+.pf-menu-icon::after {
+  top: 5px;
+}
+
+[aria-expanded='true'] .pf-menu-icon {
+  background: transparent;
+}
+[aria-expanded='true'] .pf-menu-icon::before {
+  transform: translateY(5px) rotate(45deg);
+}
+[aria-expanded='true'] .pf-menu-icon::after {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base — anything Tailwind preflight doesn't already cover.
+   ───────────────────────────────────────────────────────────── */
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  min-height: 100vh;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+/* Reveal-on-scroll (driven by IntersectionObserver in scripts/portfolio.ts) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal][data-d='1'] {
+  transition-delay: 0.1s;
+}
+[data-reveal][data-d='2'] {
+  transition-delay: 0.2s;
+}
+[data-reveal][data-d='3'] {
+  transition-delay: 0.3s;
+}
+[data-reveal][data-d='4'] {
+  transition-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

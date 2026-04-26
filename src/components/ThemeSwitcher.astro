@@ -1,0 +1,32 @@
+---
+// Segmented system/light/dark control.
+// Visual state is rendered server-side from default 'system'; client script in
+// portfolio.ts re-syncs on hydration with the user's saved preference and wires
+// the click handlers — keeps the markup zero-JS-by-default.
+
+// Mobile (<md) keeps the switch tight (px 9, font 9.5); ≥md it relaxes to px 11/font 10.5.
+const btnBase =
+  'appearance-none border-0 bg-transparent text-ink-soft py-1.5 px-[9px] md:px-[11px] rounded-full ' +
+  'cursor-pointer font-inherit text-inherit [letter-spacing:inherit] [text-transform:inherit] ' +
+  'transition-[background-color,color] duration-[250ms] ease-out leading-none ' +
+  'hover:text-ink ' +
+  'aria-checked:bg-accent aria-checked:text-bold-fg ' +
+  'over-dark:text-bold-fg-soft over-dark:hover:text-bold-fg over-dark:aria-checked:text-bold-fg';
+---
+
+<div
+  role="radiogroup"
+  aria-label="Theme"
+  data-pf-theme-switch
+  class="border-rule over-dark:border-rule-bold-strong inline-flex items-stretch rounded-full border p-[3px] font-mono text-[9.5px] tracking-[0.08em] text-inherit uppercase [backdrop-filter:blur(6px)] transition-[color,border-color] duration-350 ease-out [-webkit-backdrop-filter:blur(6px)] md:text-[10.5px]"
+>
+  <button type="button" role="radio" aria-checked="true" data-theme-mode="system" class={btnBase}
+    >System</button
+  >
+  <button type="button" role="radio" aria-checked="false" data-theme-mode="light" class={btnBase}
+    >Light</button
+  >
+  <button type="button" role="radio" aria-checked="false" data-theme-mode="dark" class={btnBase}
+    >Dark</button
+  >
+</div>

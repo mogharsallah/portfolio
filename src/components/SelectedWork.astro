@@ -1,0 +1,90 @@
+---
+import { loadPortfolio, type WorkId } from '../lib/resume.ts';
+
+const PORTFOLIO = await loadPortfolio();
+import FlottandoLogo from '../assets/logos/flottando.svg';
+import JimdoLogo from '../assets/logos/jimdo.svg';
+import FreenowLogo from '../assets/logos/freenow.svg';
+import BauerLogo from '../assets/logos/bauer.svg';
+import FashionLogo from '../assets/logos/fashioncloud.svg';
+
+const LOGOS: Record<WorkId, typeof FlottandoLogo> = {
+  flottando: FlottandoLogo,
+  jimdo: JimdoLogo,
+  freenow: FreenowLogo,
+  bauer: BauerLogo,
+  fashion: FashionLogo,
+};
+
+// Eyebrow / mono-meta line shared by header counter, row labels, art annotations.
+const meta = 'font-mono text-[11px] tracking-[0.06em] uppercase text-ink-soft';
+const tinyMeta = 'font-mono text-[9.5px] tracking-[0.08em] uppercase text-ink-soft';
+---
+
+<section id="work" data-nav="work" data-reveal class="px-gutter pt-[130px] pb-20">
+  <div class="container-page">
+    <header class="border-rule mb-14 flex items-baseline justify-between border-b pb-5">
+      <h2
+        class="font-display font-display-xl m-0 text-[clamp(40px,5vw,76px)] font-[340] tracking-tight"
+      >
+        <span>Selected </span><em class="italic">work</em>
+      </h2>
+      <span class={meta}>{PORTFOLIO.work.length} entries · 2016 → 2026</span>
+    </header>
+
+    {
+      PORTFOLIO.work.map((w, i) => {
+        const Logo = LOGOS[w.id];
+        const last = i === PORTFOLIO.work.length - 1;
+        return (
+          <article
+            data-reveal
+            class:list={[
+              'grid grid-cols-1 items-start gap-[18px] py-7',
+              'sm:grid-cols-[60px_1fr] sm:gap-x-6 sm:gap-y-5 sm:py-8',
+              'md:grid-cols-[60px_1fr_1.4fr_220px] md:gap-x-8 md:gap-y-0 md:py-9',
+              !last && 'border-rule border-b',
+            ]}
+          >
+            <div class:list={[meta, 'pt-2 tracking-[0.06em] normal-case']}>№ {w.n}</div>
+
+            <div>
+              <div class={`${meta} mb-2.5`}>
+                {w.year} · {w.client}
+              </div>
+              <h3 class="font-display font-display-sm m-0 text-[30px] leading-[1.08] font-[380] tracking-[-0.02em]">
+                {w.title}
+              </h3>
+              <div class="font-display text-ink-soft font-display-sm mt-2 text-[15px] font-[350] italic">
+                — {w.role}
+              </div>
+            </div>
+
+            <div class="sm:col-start-2 md:col-start-auto">
+              <p class="m-0 max-w-[52ch] text-[15.5px] leading-[1.6]">{w.summary}</p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                {w.stack.map((s) => (
+                  <span class="text-ink-soft border-rule rounded-full border px-[9px] py-[3px] font-mono text-[10.5px] tracking-[0.04em]">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="border-rule relative aspect-video overflow-hidden border sm:col-span-full sm:aspect-21/9 md:col-auto md:aspect-4/3">
+              <div
+                role="img"
+                aria-label={`${w.client} logo`}
+                class="text-ink absolute inset-0 flex items-center justify-center px-[6%] py-[8%] opacity-90 [&>svg]:size-full [&>svg]:text-inherit"
+              >
+                <Logo />
+              </div>
+              <div class:list={[tinyMeta, 'absolute top-2.5 left-3']}>{w.location}</div>
+              <div class:list={[tinyMeta, 'absolute right-3 bottom-2.5']}>№ {w.n}</div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>

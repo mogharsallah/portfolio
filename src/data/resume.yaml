@@ -1,0 +1,337 @@
+basics:
+  name: Mouhamed Gharsallah
+  label: Software engineer
+  email: mohamed@gharsallah.com
+  url: https://gharsallah.com
+  summary: >-
+    Software engineer with over ten years across founding-engineer, senior,
+    and full-stack roles in Hamburg and Geneva. I build the quiet machinery behind
+    useful software — fleet platforms, AI document pipelines, payments
+    infrastructure, internal tools at scale. Equally comfortable architecting
+    from a blank repo or maintaining boring-on-purpose subscription billing.
+    Recently focused on agentic AI: invoice intake on AWS Bedrock, MCP servers
+    consumed across an org.
+  location:
+    city: Hamburg
+    countryCode: DE
+  profiles:
+    - network: GitHub
+      username: mogharsallah
+      url: https://github.com/mogharsallah
+    - network: LinkedIn
+      username: gharsallah-m
+      url: https://linkedin.com/in/gharsallah-m
+
+work:
+  - id: flottando
+    name: Flottando
+    position: Founding engineer & technical lead
+    location: Geneva, CH
+    startDate: '2022-06'
+    summary: >-
+      Architected a fleet management SaaS end-to-end — Python/FastAPI backend,
+      React/TypeScript SPA, AWS infrastructure, and CI/CD pipelines. Five
+      product modules, one repo, four years.
+    highlights:
+      - >-
+        Designed and shipped the full stack: FastAPI backend, React/TypeScript
+        SPA, AWS infrastructure (Lambda, S3, SES, Cognito), and CI/CD pipelines.
+      - >-
+        Delivered five product modules — Dashboard, Authentication, Documents
+        processing, Reporting, Invoicing — as the sole or lead engineer.
+      - >-
+        Built an agentic invoice-intake pipeline on AWS Bedrock + OCR,
+        automating extraction and reconciliation for a previously manual
+        workflow.
+      - >-
+        Authored MCP servers now consumed by internal agents across the org for
+        tooling, data access, and ops automation.
+      - >-
+        Established the team's AI-assisted development workflow via OpenCode +
+        Bedrock; wrote the infra-as-code, CI/CD, and review conventions.
+    x_site:
+      n: '01'
+      client: Flottando
+      title: A fleet platform, from zero
+      pillars:
+        - - Modules shipped
+          - 'Dashboard · Authentication · Documents processing · Reporting ·
+            Invoicing'
+        - - AI surface
+          - 'Agentic invoice intake on AWS Bedrock & OCR. Internal MCP servers.'
+        - - Foundations
+          - 'CI/CD, infra-as-code.'
+      stack:
+        - Python
+        - FastAPI
+        - React
+        - TypeScript
+        - AWS Lambda
+        - Bedrock
+        - SQS
+        - OCR
+
+  - id: jimdo
+    name: Jimdo
+    position: Senior full-stack engineer
+    location: Hamburg, DE
+    startDate: '2022-01'
+    endDate: '2025-12'
+    summary: >-
+      Pioneered Jimdo's AI website-building experience by integrating GPT-3 into
+      the product — making Jimdo the first European website builder to ship
+      LLM-driven site generation. Also re-architected the core CMS for
+      third-party widgets and maintained the Stripe payments platform.
+    highlights:
+      - >-
+        Integrated GPT-3 into Jimdo's product flow — making it the first
+        European website builder to ship LLM-driven site generation end-to-end.
+      - >-
+        Re-architected the core CMS to accept third-party widget integrations,
+        coordinating across QA, product, and engineering for the rollout.
+      - >-
+        Owned the subscription billing platform on Stripe + Terraform + DynamoDB
+        + LaunchDarkly. Boring on purpose; reliable as a result.
+    x_site:
+      n: '02'
+      client: Jimdo
+      title: GPT-3 inside a website builder
+      pillars:
+        - - AI in product
+          - Shipped the first European website builder using GPT-3 for automated
+            site generation.
+        - - Platform work
+          - Re-architected the CMS to accept third-party widget integrations
+            across QA, product, and engineering.
+        - - Payments
+          - Designed subscription billing on Stripe + Terraform + DynamoDB +
+            LaunchDarkly. Boring on purpose.
+      stack:
+        - TypeScript
+        - GPT-3
+        - Stripe
+        - Terraform
+        - DynamoDB
+        - LaunchDarkly
+
+  - id: freenow
+    name: FREE NOW (mytaxi)
+    position: Full-stack engineer
+    location: Hamburg, DE
+    startDate: '2017-10'
+    endDate: '2021-09'
+    summary: >-
+      Maintained core microservices powering the FREE NOW ride-hailing platform.
+      Led four internal web tools — passenger data, mobility services, fare
+      calculations, geospatial assets — and stepped in as interim Product Owner
+      for an OAuth flow and a mobility services platform.
+    highlights:
+      - >-
+        Led four internal tools — Passenger Data, Mobility Services, Fares,
+        Geospatial Assets — across frontend and backend.
+      - >-
+        Stepped in as interim Product Owner for an OAuth flow and a mobility
+        services platform; scoped requirements, delivered both.
+    x_site:
+      n: '03'
+      client: FREE NOW (mytaxi)
+      title: Internal tools for a ride-hailing fleet
+      pillars:
+        - - Tools shipped
+          - 'Passenger data · Mobility services · Fares · Geospatial assets.'
+        - - Beyond eng
+          - Stepped in as interim Product Owner — scoped requirements, delivered
+            an OAuth flow.
+      stack:
+        - Kotlin
+        - Java
+        - Terraform
+        - AWS
+        - React
+        - OAuth
+
+  - id: bauer
+    name: Bauer Xcel Media
+    position: Senior software engineer
+    location: Hamburg, DE
+    startDate: '2021-10'
+    endDate: '2022-01'
+    summary: >-
+      Built an e-commerce platform for paid coaching consultations using Vue.js
+      and Nuxt.js with server-side rendering. Migrated legacy on-premise systems
+      to SaaS-based cloud infrastructure with MongoDB.
+    highlights:
+      - >-
+        Shipped a Vue.js + Nuxt.js consultations marketplace with server-side
+        rendering as the primary delivery model.
+      - >-
+        Led the migration from on-premise systems to SaaS-based cloud
+        infrastructure with MongoDB, reducing operational overhead for the team.
+    x_site:
+      n: '04'
+      client: Bauer Xcel Media
+      title: A B2C platform for paid coaching
+      pillars:
+        - - Product
+          - B2C consultations marketplace, SSR-first.
+        - - Migration
+          - Legacy on-prem → SaaS cloud, reducing operational overhead for the
+            team.
+      stack:
+        - Vue.js
+        - Nuxt.js
+        - MongoDB
+        - SSR
+
+  - id: fashion
+    name: Fashion Cloud
+    position: Full-stack engineer
+    location: Hamburg, DE
+    startDate: '2016-05'
+    endDate: '2017-09'
+    summary: >-
+      Developed a content-sharing platform letting fashion brands distribute
+      product assets to retailers. Built a CDN for brand media and a serverless
+      data-processing pipeline using AWS Lambda and the Serverless Framework.
+    highlights:
+      - >-
+        Developed an Angular + JWT + MongoDB content network letting brands
+        distribute product assets to retail partners.
+      - >-
+        Built a CDN for brand media and a serverless data-processing pipeline
+        on AWS Lambda + the Serverless Framework.
+    x_site:
+      n: '05'
+      client: Fashion Cloud
+      title: A B2B asset network for fashion
+      pillars:
+        - - Platform
+          - Angular + JWT + MongoDB B2B content network.
+        - - Edge
+          - CDN for brand media + serverless processing pipeline on AWS Lambda.
+      stack:
+        - Angular
+        - JWT
+        - MongoDB
+        - AWS Lambda
+        - Serverless
+
+education:
+  - institution: National Engineering School of Carthage (ENICarthage)
+    area: Computer Engineering
+    studyType: Diplôme d'Ingénieur
+    startDate: '2014'
+    endDate: '2017'
+    score: 17 / 20
+    location: Tunis, Tunisia
+  - institution: Faculty of Science, Monastir
+    area: Mathematics & Physics
+    studyType: Preparatory studies
+    startDate: '2011'
+    endDate: '2013'
+    score: Major in Mathematics and Physics
+    location: Monastir, Tunisia
+
+skills:
+  - name: Languages
+    keywords: [TypeScript, Python, Kotlin, Go, Java]
+  - name: Frontend
+    keywords: [React, Next.js, Vue, Tailwind, AI SDK]
+  - name: Backend
+    keywords: [FastAPI, Node, Spring, Bun]
+  - name: Cloud
+    keywords: [AWS, Terraform, Docker, Bedrock]
+  - name: Practices
+    keywords: [CI/CD, IaC, TDD, Code review, Agentic systems]
+
+projects:
+  - name: texterify-mcp
+    description: MCP server to manage project locales.
+    x_site:
+      year: '2026'
+      note: MCP server to manage project locales
+
+  - name: nyngi
+    description: AI naming platform, 6-phase agent.
+    x_site:
+      year: '2025'
+      note: AI naming platform, 6-phase agent
+
+  - name: Sheetspeare
+    description: Bidirectional Sheets ↔ JSON sync.
+    x_site:
+      year: '2024'
+      note: Bidirectional Sheets ↔ JSON sync
+
+  - name: vending-machine
+    description: Dual-layer authentication demo / teaching project.
+
+languages:
+  - language: Arabic
+    fluency: Native
+  - language: French
+    fluency: Proficient (C1)
+  - language: English
+    fluency: Fluent (C1)
+  - language: German
+    fluency: Intermediate (B1)
+
+x_site:
+  shortName: Mouhamed
+  initials: MG
+  hero:
+    eyebrow: 'Software engineer · Hamburg'
+    headline: >-
+      I build the quiet machinery behind useful software — from fleet platforms
+      to AI document pipelines.
+    sub: >-
+      Currently founding engineer at Flottando, shipping a fleet management SaaS
+      from zero. Previously at Jimdo, FREE NOW, Bauer Xcel.
+  now:
+    - kind: Building
+      text: End to End B2B and B2C scalable solutions
+    - kind: Shipping
+      text: Open source agentic workflows and MCP servers
+    - kind: Reading
+      text: SAP CAP guidelines and cookbooks  & papers on LLM ergonomics
+    - kind: Living
+      text: Hamburg — Mediterranean roots, North Sea winters
+  about:
+    paragraphs:
+      - >-
+        I'm Mouhamed — a software engineer who likes building the parts of
+        products that earn their keep. Backends, infra, the awkward middle layer
+        where business logic lives.
+      - >-
+        Most recently I've been a founding engineer at Flottando in Geneva,
+        building a fleet management SaaS from a blank repo. Before that, ten
+        years across Jimdo, Bauer, FREE NOW, and Fashion Cloud in Hamburg —
+        payments, AI, internal tools, the works.
+  oss:
+    - repo: Serverless Framework
+      note: S3 filter rules, profile overwriting
+      stars: 46k★
+    - repo: GoReleaser
+      note: Authored official docs site
+      stars: 14k★
+
+x_cv:
+  tagline: >-
+    Founding & senior engineer · Backends, infra, and the awkward middle layer
+    where business logic lives.
+  summary_highlights:
+    - >-
+      Founding engineer — built a fleet SaaS from zero across five product
+      modules.
+    - Shipped Europe's first GPT-3-powered website builder at Jimdo (2022).
+    - Authored MCP servers and agentic invoice pipelines on AWS Bedrock.
+    - >-
+      Over ten years across Hamburg & Geneva — payments, AI, internal tools,
+      fleets.
+  oss:
+    - repo: Serverless Framework
+      note: 2 PRs merged — S3 filter rules, profile overwriting.
+      stars: 46k★
+    - repo: GoReleaser
+      note: Authored the official documentation site.
+      stars: 14k★

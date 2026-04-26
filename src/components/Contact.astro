@@ -1,0 +1,64 @@
+---
+import { loadPortfolio } from '../lib/resume.ts';
+
+const PORTFOLIO = await loadPortfolio();
+
+const [emailUser, emailDomain] = PORTFOLIO.email.split('@');
+
+const valueLink =
+  'inline-block max-w-full font-display font-display-sm text-[24px] font-[380] text-ink no-underline ' +
+  'border-b border-rule pb-1 transition-[color,border-color] duration-200 ' +
+  'hover:text-accent-text hover:border-accent-text [overflow-wrap:anywhere] break-words';
+---
+
+<section
+  id="contact"
+  data-nav="contact"
+  data-reveal
+  class="border-rule px-gutter border-t pt-32.5 pb-15"
+>
+  <div class="container-page">
+    <div class="text-ink-soft mb-8 font-mono text-xs tracking-widest uppercase">✦ let's talk</div>
+
+    <h2
+      class="font-display font-display-xl m-0 mb-16 max-w-[11ch] text-[clamp(64px,9vw,168px)] leading-[0.92] font-[320] tracking-[-0.045em]"
+    >
+      Got a <em class="text-accent-text font-[320] italic">hard</em> problem?
+    </h2>
+
+    <div
+      class="border-rule grid grid-cols-1 gap-7 border-t pt-7 sm:grid-cols-2 sm:gap-8 md:grid-cols-3"
+    >
+      <div>
+        <div class="text-ink-soft mb-3 font-mono text-[10.5px] tracking-widest uppercase">
+          Email
+        </div>
+        <a
+          class={valueLink}
+          href={`mailto:${emailUser}@${emailDomain}`}
+          data-email
+          data-email-user={emailUser}
+          data-email-domain={emailDomain}>{PORTFOLIO.email}</a
+        >
+      </div>
+      <div>
+        <div class="text-ink-soft mb-3 font-mono text-[10.5px] tracking-widest uppercase">
+          GitHub
+        </div>
+        <a class={valueLink} href={`https://${PORTFOLIO.github}`} rel="me noopener"
+          >{PORTFOLIO.github}</a
+        >
+      </div>
+      <div>
+        <div class="text-ink-soft mb-3 font-mono text-[10.5px] tracking-widest uppercase">Site</div>
+        <a class={valueLink} href={`https://${PORTFOLIO.site}`}>{PORTFOLIO.site}</a>
+      </div>
+    </div>
+
+    <div
+      class="border-rule text-ink-soft mt-25 border-t pt-6 font-mono text-[11px] tracking-[0.06em] uppercase"
+    >
+      <span>© 2026 · {PORTFOLIO.name}</span>
+    </div>
+  </div>
+</section>
