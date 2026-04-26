@@ -3,10 +3,11 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { parse as parseYaml } from 'yaml';
 
-const ROOT = resolve(import.meta.dir, '..');
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const YAML_PATH = join(ROOT, 'src/data/resume.yaml');
 const TEMPLATE = join(ROOT, 'resume/template.typ');
 const FONTS_DIR = join(ROOT, 'resume/fonts');
