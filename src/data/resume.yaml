@@ -25,7 +25,7 @@ basics:
 work:
   - id: flottando
     name: Flottando
-    position: Founding engineer & technical lead
+    position: Senior staff & full-stack engineer
     location: Geneva, CH
     startDate: '2022-06'
     summary: >-
@@ -285,7 +285,7 @@ x_site:
       I build the quiet machinery behind useful software — from fleet platforms
       to AI document pipelines.
     sub: >-
-      Currently founding engineer at Flottando, shipping a fleet management SaaS
+      Currently senior staff & full-stack engineer at Flottando, shipping a fleet management SaaS
       from zero. Previously at Jimdo, FREE NOW, Bauer Xcel.
   now:
     - kind: Building
@@ -303,7 +303,7 @@ x_site:
         products that earn their keep. Backends, infra, the awkward middle layer
         where business logic lives.
       - >-
-        Most recently I've been a founding engineer at Flottando in Geneva,
+        Most recently I've been a senior staff & full-stack engineer at Flottando in Geneva,
         building a fleet management SaaS from a blank repo. Before that, ten
         years across Jimdo, Bauer, FREE NOW, and Fashion Cloud in Hamburg —
         payments, AI, internal tools, the works.
@@ -317,11 +317,11 @@ x_site:
 
 x_cv:
   tagline: >-
-    Founding & senior engineer · Backends, infra, and the awkward middle layer
+    Senior staff & full-stack engineer · Backends, infra, and the awkward middle layer
     where business logic lives.
   summary_highlights:
     - >-
-      Founding engineer — built a fleet SaaS from zero across five product
+      Senior staff & full-stack engineer — built a fleet SaaS from zero across five product
       modules.
     - Shipped Europe's first GPT-3-powered website builder at Jimdo (2022).
     - Authored MCP servers and agentic invoice pipelines on AWS Bedrock.
